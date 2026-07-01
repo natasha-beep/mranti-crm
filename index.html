@@ -124,8 +124,6 @@
       align-items: center;
       gap: 28px;
     }
-
-    /* User bar */
     .user-bar {
       width: 100%;
       display: flex;
@@ -169,7 +167,6 @@
       color: #ef4444;
       background: rgba(239,68,68,0.05);
     }
-
     .logo {
       width: 160px; height: 72px;
       background: url("https://cdn.prod.website-files.com/6719e3902a71ea8154ba371d/6996a2c470a01e3f32ffa080_M30.png") center/contain no-repeat;
@@ -195,7 +192,6 @@
     }
     .welcome-title { font-size: 28px; font-weight: 800; color: #0f172a; line-height: 1.2; margin-top: 4px; }
     .welcome-sub { font-size: 14px; color: #64748b; margin-top: 2px; }
-
     .divider {
       width: 100%; display: flex; align-items: center; gap: 12px;
       color: #94a3b8; font-size: 11px; font-weight: 600;
@@ -205,7 +201,6 @@
       content: ''; flex: 1; height: 1px;
       background: rgba(148,163,184,0.35);
     }
-
     .choices { width: 100%; display: flex; flex-direction: column; gap: 14px; }
     .choice-btn {
       display: flex; align-items: center; gap: 18px;
@@ -241,7 +236,6 @@
       font-size: 16px; flex-shrink: 0; transition: background 0.2s;
     }
     .choice-btn:hover .choice-arrow { background: #1d4ed8; }
-
     .footer { font-size: 11px; color: #94a3b8; text-align: center; }
   </style>
 </head>
@@ -316,18 +310,16 @@
   </div>
 
   <script>
-    // ── PASTE YOUR FIREBASE CONFIG HERE ──
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyCoNzt4JzU6P52hm38LKsAaUl8VwzuOszs",
+      authDomain: "mranti-crm.firebaseapp.com",
+      projectId: "mranti-crm",
+      storageBucket: "mranti-crm.firebasestorage.app",
+      messagingSenderId: "570845671709",
+      appId: "1:570845671709:web:1afe8ed0386584b00af1f4"
     };
 
-    // ── YOUR GOOGLE WORKSPACE DOMAIN ──
-    const ALLOWED_DOMAIN = "mranti.com.my"; // change to your actual domain
+    const ALLOWED_DOMAIN = "mranti.my";
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
@@ -339,7 +331,7 @@
         const domain = user.email.split('@')[1];
         if (domain !== ALLOWED_DOMAIN) {
           auth.signOut();
-          showError('Access restricted to @' + ALLOWED_DOMAIN + ' accounts only.');
+          showError('Access restricted to @mranti.my accounts only.');
           return;
         }
         const firstName = user.displayName ? user.displayName.split(' ')[0] : 'there';
