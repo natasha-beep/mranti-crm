@@ -522,16 +522,27 @@
     }
 
     // ── CALENDAR ──
+    
     async function syncCalendar() {
       try {
+        setCalendarStatus('Opening Google permission popup...');
+    
         const result = await auth.signInWithPopup(provider);
         const cred = firebase.auth.GoogleAuthProvider.credentialFromResult(result);
-        googleAccessToken = cred.accessToken;
-        await loadCalendar();
-      } catch (e) {
-        if (e.code !== 'auth/popup-closed-by-user') {
-          setCalendarStatus('Failed to sync. Please try again.');
+    
+        googleAccessToken = cred && cred.accessToken ? cred.accessToken : null;
+    
+        if (!googleAccessToken) {
+          throw new Error('No Google access token returned. Calendar permission may not have been granted.');
         }
+    
+        console.log('Google access token received:', googleAccessToken ? 'YES' : 'NO');
+    
+        await loadCalendar();
+    
+      } catch (e) {
+        console.error('Calendar sync error:', e);
+        setCalendarStatus('⚠️ Calendar sync failed: ' + (e.message || e.code || 'Unknown error'));
       }
     }
 
