@@ -451,8 +451,13 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const provider = new firebase.auth.GoogleAuthProvider();
-    provider.setCustomParameters({ hd: ALLOWED_DOMAIN });
     provider.addScope('https://www.googleapis.com/auth/calendar.readonly');
+
+    provider.setCustomParameters({
+      hd: ALLOWED_DOMAIN,
+      prompt: 'consent',
+      include_granted_scopes: 'true'
+    });
 
     let currentUser = null;
     let googleAccessToken = null;
