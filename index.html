@@ -622,6 +622,450 @@
       .hero-meta { grid-template-columns: 1fr; }
     }
 
+
+    /* -- CLEAN WORK APP REFINEMENT V5 -- */
+    #appScreen {
+      max-width: 1280px;
+      gap: 20px;
+    }
+
+    .top-nav {
+      padding: 18px 22px;
+      border-radius: 24px;
+      align-items: center;
+    }
+
+    .brand-block {
+      flex: 1 1 auto;
+      min-width: 320px;
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-subtitle {
+      white-space: normal;
+    }
+
+    .user-bar {
+      flex: 0 0 auto;
+      width: auto;
+      min-width: 420px;
+      max-width: 520px;
+      gap: 16px;
+      padding: 10px 12px;
+    }
+
+    .user-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .user-info > div:last-child {
+      min-width: 0;
+    }
+
+    .user-name,
+    .user-email {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .signout-btn {
+      flex-shrink: 0;
+      padding: 9px 16px;
+      border-radius: 12px;
+    }
+
+    .dashboard-grid {
+      grid-template-columns: minmax(360px, 0.72fr) minmax(680px, 1.28fr);
+      gap: 20px;
+    }
+
+    .action-panel {
+      gap: 0;
+    }
+
+    .hero-card {
+      min-height: auto;
+      padding: 26px;
+      gap: 18px;
+      justify-content: flex-start;
+      border-radius: 24px;
+    }
+
+    .welcome-title {
+      font-size: 30px;
+    }
+
+    .hero-card .welcome-sub,
+    .hero-meta {
+      display: none !important;
+    }
+
+    .hero-actions-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      margin: 2px 0 2px;
+      color: #94a3b8;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+    }
+
+    .hero-actions-title::before,
+    .hero-actions-title::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: rgba(148,163,184,0.28);
+    }
+
+    .hero-card .choices {
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card .choice-btn {
+      background: rgba(255,255,255,0.88);
+      border-color: rgba(147,197,253,0.4);
+      box-shadow: 0 8px 24px rgba(37,99,235,0.07);
+    }
+
+    .action-panel > .divider,
+    .action-panel > .choices {
+      display: none !important;
+    }
+
+    .calendar-panel {
+      border-radius: 24px;
+      padding: 24px;
+      max-height: calc(100vh - 156px);
+    }
+
+    .calendar-panel-top {
+      align-items: center;
+      padding: 0;
+    }
+
+    .section-eyebrow,
+    .section-subtitle {
+      display: none;
+    }
+
+    .section-title {
+      font-size: 26px;
+    }
+
+    .sync-btn {
+      min-width: 138px;
+      padding: 11px 18px;
+    }
+
+    .tabs {
+      margin-top: 2px;
+    }
+
+    .events-list {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .event-card {
+      min-height: 84px;
+      align-items: center;
+      border-radius: 16px;
+      padding: 14px 16px;
+    }
+
+    .event-title {
+      -webkit-line-clamp: 1;
+      font-size: 14px;
+    }
+
+    .event-attendees {
+      -webkit-line-clamp: 1;
+    }
+
+    .footer {
+      opacity: 0.75;
+    }
+
+    @media (max-width: 1180px) {
+      .dashboard-grid {
+        grid-template-columns: minmax(340px, 0.8fr) minmax(560px, 1.2fr);
+      }
+
+      .user-bar {
+        min-width: 360px;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .top-nav {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .brand-block {
+        min-width: 0;
+      }
+
+      .user-bar {
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .calendar-panel {
+        max-height: none;
+      }
+    }
+
+    @media (max-width: 620px) {
+      body {
+        padding: 12px;
+      }
+
+      #appScreen {
+        gap: 14px;
+        padding-bottom: 12px;
+      }
+
+      .top-nav {
+        padding: 14px;
+        border-radius: 18px;
+      }
+
+      .brand-block {
+        justify-content: flex-start;
+        text-align: left;
+      }
+
+      .logo.brand-logo {
+        width: 128px;
+        height: 40px;
+      }
+
+      .brand-divider,
+      .brand-copy {
+        display: none;
+      }
+
+      .user-bar {
+        align-items: center;
+        gap: 10px;
+      }
+
+      .user-name {
+        font-size: 12px;
+      }
+
+      .user-email {
+        font-size: 10px;
+      }
+
+      .signout-btn {
+        padding: 8px 12px;
+        font-size: 11px;
+      }
+
+      .hero-card,
+      .calendar-panel {
+        padding: 18px;
+        border-radius: 20px;
+      }
+
+      .welcome-title {
+        font-size: 26px;
+      }
+
+      .calendar-panel-top {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .sync-btn {
+        width: 100%;
+      }
+
+      .tab-btn {
+        font-size: 11px;
+        padding: 10px 8px;
+      }
+
+      .event-card {
+        align-items: flex-start;
+      }
+    }
+
+  
+    /* -- TECH BRAND ICON SYSTEM V6 -- */
+    .tech-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      color: #1d4ed8;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+    }
+
+    .choice-icon {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(37,99,235,0.18);
+      background: linear-gradient(135deg, rgba(219,234,254,0.95), rgba(239,246,255,0.9)) !important;
+    }
+
+    .choice-icon::after {
+      content: '';
+      position: absolute;
+      inset: 9px;
+      border: 1px solid rgba(37,99,235,0.22);
+      border-radius: 9px;
+      pointer-events: none;
+    }
+
+    .icon-purple {
+      background: linear-gradient(135deg, rgba(237,233,254,0.95), rgba(245,243,255,0.9)) !important;
+    }
+
+    .icon-purple .tech-icon {
+      color: #6d28d9;
+    }
+
+    .sync-btn::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border: 2px solid currentColor;
+      border-top-color: transparent;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: -1px;
+    }
+
+    .tab-btn::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: currentColor;
+      opacity: 0.55;
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: 1px;
+    }
+
+    .event-date::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 2px;
+      border: 1.5px solid currentColor;
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: 0;
+      opacity: 0.75;
+    }
+
+    .event-attendees::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: currentColor;
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: 1px;
+      opacity: 0.55;
+    }
+
+    .modal-success .s-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      margin: 0 auto 16px;
+      background: linear-gradient(135deg, #dbeafe, #eff6ff);
+      border: 1px solid rgba(37,99,235,0.18);
+      position: relative;
+      font-size: 0 !important;
+    }
+
+    .modal-success .s-icon::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 10px;
+      border-left: 3px solid #2563eb;
+      border-bottom: 3px solid #2563eb;
+      transform: rotate(-45deg);
+      left: 18px;
+      top: 20px;
+    }
+
+    .login-title { letter-spacing: -0.4px; }
+
+    .welcome-title::after {
+      content: '';
+      display: block;
+      width: 42px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #2563eb, #00d6ff);
+      margin-top: 14px;
+    }
+
+    .choice-arrow {
+      font-size: 0 !important;
+      position: relative;
+    }
+
+    .choice-arrow::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-top: 2px solid #fff;
+      border-right: 2px solid #fff;
+      transform: rotate(45deg);
+      display: block;
+      margin-left: -2px;
+    }
+
+    .event-log-btn {
+      font-size: 0 !important;
+      width: 42px;
+      height: 38px;
+      padding: 0 !important;
+      position: relative;
+    }
+
+    .event-log-btn::after {
+      content: '';
+      width: 9px;
+      height: 9px;
+      border-top: 2px solid #fff;
+      border-right: 2px solid #fff;
+      transform: rotate(45deg);
+      display: block;
+      margin: 0 auto;
+    }
+
   </style>
 </head>
 <body>
@@ -631,7 +1075,7 @@
     <div class="login-logo"></div>
     <div class="login-card">
       <span class="login-label">MRANTI CRM</span>
-      <h1 class="login-title">Sign in 🔐</h1>
+      <h1 class="login-title">Sign in</h1>
       <p class="login-sub">Use your MRANTI Google Workspace account to continue.</p>
       <div class="error-msg" id="errorMsg"></div>
       <button class="google-btn" onclick="signIn()">
@@ -674,40 +1118,30 @@
         <div class="card hero-card">
           <div>
             <span class="welcome-label">MRANTI CRM</span>
-            <h1 class="welcome-title" id="welcomeMsg">Welcome 👋</h1>
-            <p class="welcome-sub">Capture contacts from meetings, extract business-card details, and keep your CRM records searchable.</p>
+            <h1 class="welcome-title" id="welcomeMsg">Welcome</h1>
           </div>
-          <div class="hero-meta">
-            <div class="meta-pill">
-              <span class="meta-label">Primary action</span>
-              <span class="meta-value">Log meeting details</span>
-            </div>
-            <div class="meta-pill">
-              <span class="meta-label">Connected source</span>
-              <span class="meta-value">Google Calendar</span>
-            </div>
+
+          <div class="hero-actions-title">Quick actions</div>
+
+          <div class="choices">
+            <a class="choice-btn" href="#" onclick="event.preventDefault();openManualModal()">
+              <div class="choice-icon icon-blue"><span class="tech-icon">ID</span></div>
+              <div class="choice-text">
+                <span class="choice-title">Input Meeting Details</span>
+                <span class="choice-desc">Upload a business card and log meeting notes manually</span>
+              </div>
+              <span class="choice-arrow">›</span>
+            </a>
+
+            <a class="choice-btn" href="https://mrantidata.app.n8n.cloud/webhook/view-contacts" target="_blank">
+              <div class="choice-icon icon-purple"><span class="tech-icon">DB</span></div>
+              <div class="choice-text">
+                <span class="choice-title">View &amp; Search Contacts</span>
+                <span class="choice-desc">Browse the CRM database and filter records</span>
+              </div>
+              <span class="choice-arrow">›</span>
+            </a>
           </div>
-        </div>
-
-        <span class="divider">Quick Actions</span>
-
-        <div class="choices">
-          <a class="choice-btn" href="#" onclick="event.preventDefault();openManualModal()">
-            <div class="choice-icon icon-blue">🪪</div>
-            <div class="choice-text">
-              <span class="choice-title">Input Meeting Details</span>
-              <span class="choice-desc">Upload a business card and log meeting notes manually</span>
-            </div>
-            <span class="choice-arrow">›</span>
-          </a>
-          <a class="choice-btn" href="https://mrantidata.app.n8n.cloud/webhook/view-contacts" target="_blank">
-            <div class="choice-icon icon-purple">🗄️</div>
-            <div class="choice-text">
-              <span class="choice-title">View &amp; Search Contacts</span>
-              <span class="choice-desc">Browse the full CRM database and filter records</span>
-            </div>
-            <span class="choice-arrow">›</span>
-          </a>
         </div>
       </section>
 
@@ -718,24 +1152,24 @@
             <div class="section-title">Your Meetings</div>
             <div class="section-subtitle">Select a meeting to pre-fill title, date and attendees.</div>
           </div>
-          <button class="sync-btn" onclick="syncCalendar()">🔄 Sync Calendar</button>
+          <button class="sync-btn" onclick="syncCalendar()">Sync Calendar</button>
         </div>
 
         <!-- CALENDAR SECTION -->
         <div class="calendar-section">
           <div class="calendar-header">
             <div>
-              <div class="calendar-title">📅 Your Meetings</div>
+              <div class="calendar-title">Your Meetings</div>
               <div class="calendar-subtitle">Click any meeting to log contact details</div>
             </div>
           </div>
 
           <div class="tabs">
-            <button class="tab-btn active" id="tabPast" onclick="switchTab('past')">⏮ Past 7 days</button>
-            <button class="tab-btn" id="tabUpcoming" onclick="switchTab('upcoming')">⏭ Upcoming 7 days</button>
+            <button class="tab-btn active" id="tabPast" onclick="switchTab('past')">Past 7 days</button>
+            <button class="tab-btn" id="tabUpcoming" onclick="switchTab('upcoming')">Upcoming 7 days</button>
           </div>
 
-          <div id="calendarStatus" class="calendar-status">Click 🔄 Sync Calendar to load your meetings.</div>
+          <div id="calendarStatus" class="calendar-status">Click Sync Calendar to load your meetings.</div>
           <div id="calendarEvents" class="events-list"></div>
         </div>
       </section>
@@ -750,7 +1184,7 @@
 
       <!-- Success state -->
       <div class="modal-success" id="modalSuccess">
-        <span class="s-icon">✅</span>
+        <span class="s-icon"></span>
         <h3>Saved Successfully!</h3>
         <p>Meeting details have been saved to the CRM.</p>
         <button class="close-success-btn" onclick="closeModal()">Done</button>
@@ -760,7 +1194,7 @@
       <div id="modalForm">
         <div class="modal-header">
           <div>
-            <div class="modal-title">Log Meeting Details</div>
+            <div class="modal-title">LogMeeting Details</div>
             <div class="modal-subtitle" id="modalSubtitle">Fill in the details below</div>
           </div>
           <button class="close-btn" onclick="closeModal()">×</button>
@@ -768,7 +1202,7 @@
 
         <div class="modal-error" id="modalError"></div>
 
-        <div class="form-section-label">📅 Meeting Info</div>
+        <div class="form-section-label">Meeting Info</div>
 
         <div class="form-group">
           <label class="form-label">Meeting Title</label>
@@ -784,7 +1218,7 @@
         </div>
 
         <div class="form-divider"></div>
-        <div class="form-section-label">🪪 Business Card</div>
+        <div class="form-section-label"><span class="tech-icon">ID</span> Business Card</div>
 
         <div class="form-group">
           <label class="form-label">Upload Business Card <span class="req">*</span></label>
@@ -792,7 +1226,7 @@
         </div>
 
         <div class="form-divider"></div>
-        <div class="form-section-label">📝 Meeting Details</div>
+        <div class="form-section-label">Meeting Details</div>
 
         <div class="form-group">
           <label class="form-label">Purpose of Meeting <span class="req">*</span></label>
@@ -809,7 +1243,7 @@
   </div>
 
   <script>
-    console.log('MRANTI CRM professional UI v4 loaded');
+    console.log('MRANTI CRM tech UI v6 loaded');
     const firebaseConfig = {
       apiKey: "AIzaSyCoNzt4JzU6P52hm38LKsAaUl8VwzuOszs",
       authDomain: "mranti-crm.firebaseapp.com",
@@ -992,7 +1426,7 @@
 
     async function loadCalendar() {
       if (!googleAccessToken) {
-        setCalendarStatus('Click 🔄 Sync to load your meetings.');
+        setCalendarStatus('Click Sync to load your meetings.');
         return;
       }
       setCalendarStatus('Loading your meetings...');
@@ -1065,10 +1499,10 @@
           <div class="event-card" onclick="openEventModal('${key}')">
             <div class="event-info">
               <div class="event-title">${esc(title)}</div>
-              <div class="event-date">📅 ${fmtDate(start)}</div>
-              ${others.length ? `<div class="event-attendees">👥 ${esc(others.join(', '))}</div>` : ''}
+              <div class="event-date">${fmtDate(start)}</div>
+              ${others.length ? `<div class="event-attendees">${esc(others.join(', '))}</div>` : ''}
             </div>
-            <button class="event-log-btn" onclick="event.stopPropagation();openEventModal('${key}')">Log →</button>
+            <button class="event-log-btn" onclick="event.stopPropagation();openEventModal('${key}')">Log→</button>
           </div>`;
       }).join('');
     }
@@ -1142,7 +1576,7 @@
       if (!file)    { showModalErr('Please upload a business card.'); return; }
 
       btn.disabled = true;
-      btn.textContent = '⏳ Saving...';
+      btn.textContent = 'Saving...';
       errDiv.style.display = 'none';
 
       const fd = new FormData();
