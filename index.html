@@ -9,7 +9,6 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: 'Inter', 'Segoe UI', sans-serif;
       background: linear-gradient(160deg, #e8f4fd 0%, #dbeafe 40%, #eff6ff 100%);
@@ -38,15 +37,12 @@
       pointer-events: none; z-index: 0;
     }
 
-    /* ── LOGIN SCREEN ── */
+    /* ── LOGIN ── */
     #loginScreen {
       position: relative; z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 28px;
-      width: 100%;
-      max-width: 440px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 28px;
+      width: 100%; max-width: 440px;
     }
     .login-logo {
       width: 160px; height: 72px;
@@ -57,138 +53,85 @@
       width: 100%;
       background: rgba(255,255,255,0.9);
       border: 1px solid rgba(147,197,253,0.4);
-      border-radius: 24px;
-      padding: 44px 40px;
+      border-radius: 24px; padding: 44px 40px;
       box-shadow: 0 8px 40px rgba(59,130,246,0.12), 0 2px 8px rgba(0,0,0,0.06);
       backdrop-filter: blur(12px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      text-align: center;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 12px; text-align: center;
     }
     .login-label {
       font-size: 11px; font-weight: 700;
       letter-spacing: 2.5px; text-transform: uppercase;
-      color: #2563eb;
-      background: rgba(37,99,235,0.08);
+      color: #2563eb; background: rgba(37,99,235,0.08);
       padding: 4px 14px; border-radius: 20px;
       border: 1px solid rgba(37,99,235,0.15);
     }
     .login-title { font-size: 26px; font-weight: 800; color: #0f172a; margin-top: 4px; }
     .login-sub { font-size: 13px; color: #64748b; margin-bottom: 8px; }
     .google-btn {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      padding: 14px 20px;
-      background: #ffffff;
-      border: 1.5px solid #d1d5db;
-      border-radius: 12px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 15px;
-      font-weight: 600;
-      color: #0f172a;
-      transition: all 0.2s;
+      display: flex; align-items: center; gap: 12px;
+      width: 100%; padding: 14px 20px;
+      background: #ffffff; border: 1.5px solid #d1d5db;
+      border-radius: 12px; cursor: pointer;
+      font-family: inherit; font-size: 15px; font-weight: 600;
+      color: #0f172a; transition: all 0.2s;
       box-shadow: 0 1px 4px rgba(0,0,0,0.08);
       justify-content: center;
     }
-    .google-btn:hover {
-      border-color: #3b82f6;
-      box-shadow: 0 4px 16px rgba(59,130,246,0.15);
-      transform: translateY(-1px);
-    }
+    .google-btn:hover { border-color: #3b82f6; box-shadow: 0 4px 16px rgba(59,130,246,0.15); transform: translateY(-1px); }
     .google-btn img { width: 22px; height: 22px; }
     .login-note { font-size: 11px; color: #94a3b8; margin-top: 4px; }
     .error-msg {
       display: none;
-      background: rgba(239,68,68,0.1);
-      border: 1px solid rgba(239,68,68,0.3);
-      color: #dc2626;
-      border-radius: 10px;
-      padding: 10px 16px;
-      font-size: 13px;
-      width: 100%;
-      text-align: center;
+      background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+      color: #dc2626; border-radius: 10px;
+      padding: 10px 16px; font-size: 13px; width: 100%; text-align: center;
     }
 
-    /* ── MAIN APP SCREEN ── */
+    /* ── APP ── */
     #appScreen {
-      display: none;
-      position: relative; z-index: 1;
-      width: 100%;
-      max-width: 500px;
-      flex-direction: column;
-      align-items: center;
-      gap: 28px;
+      display: none; position: relative; z-index: 1;
+      width: 100%; max-width: 560px;
+      flex-direction: column; align-items: center; gap: 24px;
     }
     .user-bar {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255,255,255,0.85);
-      border: 1px solid rgba(147,197,253,0.3);
-      border-radius: 14px;
-      padding: 10px 16px;
-      box-shadow: 0 2px 8px rgba(59,130,246,0.08);
-      backdrop-filter: blur(8px);
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.85); border: 1px solid rgba(147,197,253,0.3);
+      border-radius: 14px; padding: 10px 16px;
+      box-shadow: 0 2px 8px rgba(59,130,246,0.08); backdrop-filter: blur(8px);
     }
     .user-info { display: flex; align-items: center; gap: 10px; }
-    .user-avatar {
-      width: 34px; height: 34px; border-radius: 50%;
-      border: 2px solid rgba(37,99,235,0.2);
-      object-fit: cover;
-    }
+    .user-avatar { width: 34px; height: 34px; border-radius: 50%; border: 2px solid rgba(37,99,235,0.2); object-fit: cover; }
     .user-avatar-placeholder {
-      width: 34px; height: 34px; border-radius: 50%;
-      background: #dbeafe;
+      width: 34px; height: 34px; border-radius: 50%; background: #dbeafe;
       display: flex; align-items: center; justify-content: center;
       font-size: 14px; font-weight: 700; color: #2563eb;
     }
     .user-name { font-size: 13px; font-weight: 600; color: #0f172a; }
     .user-email { font-size: 11px; color: #64748b; }
     .signout-btn {
-      padding: 7px 14px;
-      background: transparent;
-      border: 1.5px solid rgba(147,197,253,0.5);
-      border-radius: 8px;
-      color: #64748b;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s;
+      padding: 7px 14px; background: transparent;
+      border: 1.5px solid rgba(147,197,253,0.5); border-radius: 8px;
+      color: #64748b; font-size: 12px; font-weight: 600;
+      cursor: pointer; font-family: inherit; transition: all 0.2s;
     }
-    .signout-btn:hover {
-      border-color: #ef4444;
-      color: #ef4444;
-      background: rgba(239,68,68,0.05);
-    }
+    .signout-btn:hover { border-color: #ef4444; color: #ef4444; background: rgba(239,68,68,0.05); }
     .logo {
       width: 160px; height: 72px;
       background: url("https://cdn.prod.website-files.com/6719e3902a71ea8154ba371d/6996a2c470a01e3f32ffa080_M30.png") center/contain no-repeat;
       filter: brightness(0) saturate(100%) invert(17%) sepia(80%) saturate(1200%) hue-rotate(210deg) brightness(90%);
     }
     .card {
-      width: 100%;
-      background: rgba(255,255,255,0.85);
-      border: 1px solid rgba(147,197,253,0.4);
-      border-radius: 24px; padding: 36px 32px;
+      width: 100%; background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(147,197,253,0.4); border-radius: 24px; padding: 36px 32px;
       box-shadow: 0 8px 40px rgba(59,130,246,0.12), 0 2px 8px rgba(0,0,0,0.06);
       backdrop-filter: blur(12px);
-      display: flex; flex-direction: column;
-      align-items: center; gap: 10px; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;
     }
     .welcome-label {
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 2.5px; text-transform: uppercase;
-      color: #2563eb;
-      background: rgba(37,99,235,0.08);
-      padding: 4px 14px; border-radius: 20px;
-      border: 1px solid rgba(37,99,235,0.15);
+      font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+      color: #2563eb; background: rgba(37,99,235,0.08);
+      padding: 4px 14px; border-radius: 20px; border: 1px solid rgba(37,99,235,0.15);
     }
     .welcome-title { font-size: 28px; font-weight: 800; color: #0f172a; line-height: 1.2; margin-top: 4px; }
     .welcome-sub { font-size: 14px; color: #64748b; margin-top: 2px; }
@@ -197,51 +140,154 @@
       color: #94a3b8; font-size: 11px; font-weight: 600;
       letter-spacing: 1.5px; text-transform: uppercase;
     }
-    .divider::before, .divider::after {
-      content: ''; flex: 1; height: 1px;
-      background: rgba(148,163,184,0.35);
-    }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: rgba(148,163,184,0.35); }
     .choices { width: 100%; display: flex; flex-direction: column; gap: 14px; }
     .choice-btn {
       display: flex; align-items: center; gap: 18px;
       width: 100%; padding: 20px 24px;
-      background: rgba(255,255,255,0.9);
-      border: 1.5px solid rgba(147,197,253,0.35);
-      border-radius: 18px; color: #0f172a;
-      text-decoration: none; cursor: pointer;
+      background: rgba(255,255,255,0.9); border: 1.5px solid rgba(147,197,253,0.35);
+      border-radius: 18px; color: #0f172a; text-decoration: none; cursor: pointer;
       transition: all 0.2s ease;
       box-shadow: 0 2px 12px rgba(59,130,246,0.08), 0 1px 3px rgba(0,0,0,0.06);
       backdrop-filter: blur(8px);
     }
-    .choice-btn:hover {
-      background: #ffffff; border-color: #3b82f6;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(59,130,246,0.18), 0 2px 8px rgba(0,0,0,0.08);
-    }
+    .choice-btn:hover { background: #ffffff; border-color: #3b82f6; transform: translateY(-3px); box-shadow: 0 12px 32px rgba(59,130,246,0.18), 0 2px 8px rgba(0,0,0,0.08); }
     .choice-btn:active { transform: translateY(-1px); }
-    .choice-icon {
-      width: 48px; height: 48px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px; flex-shrink: 0;
-    }
+    .choice-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
     .icon-blue   { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
     .icon-purple { background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
     .choice-text { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
     .choice-title { font-size: 15px; font-weight: 700; color: #0f172a; }
     .choice-desc { font-size: 12px; color: #64748b; }
     .choice-arrow {
-      margin-left: auto; width: 32px; height: 32px;
-      border-radius: 50%; background: #2563eb; color: #ffffff;
+      margin-left: auto; width: 32px; height: 32px; border-radius: 50%;
+      background: #2563eb; color: #ffffff;
       display: flex; align-items: center; justify-content: center;
       font-size: 16px; flex-shrink: 0; transition: background 0.2s;
     }
     .choice-btn:hover .choice-arrow { background: #1d4ed8; }
+
+    /* ── CALENDAR SECTION ── */
+    .calendar-section {
+      width: 100%; display: flex; flex-direction: column; gap: 14px;
+    }
+    .calendar-header {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .calendar-title { font-size: 16px; font-weight: 800; color: #0f172a; }
+    .calendar-subtitle { font-size: 12px; color: #64748b; margin-top: 2px; }
+    .sync-btn {
+      padding: 8px 16px;
+      background: rgba(37,99,235,0.08); border: 1.5px solid rgba(37,99,235,0.2);
+      border-radius: 8px; color: #2563eb;
+      font-size: 12px; font-weight: 700; cursor: pointer;
+      font-family: inherit; transition: all 0.2s; white-space: nowrap;
+    }
+    .sync-btn:hover { background: rgba(37,99,235,0.15); border-color: #3b82f6; }
+    .tabs {
+      display: flex; background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(147,197,253,0.3); border-radius: 10px;
+      padding: 4px; gap: 4px;
+    }
+    .tab-btn {
+      flex: 1; padding: 9px 12px; border: none; border-radius: 7px;
+      font-family: inherit; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; background: transparent; color: #64748b;
+    }
+    .tab-btn.active { background: #2563eb; color: #ffffff; box-shadow: 0 2px 8px rgba(37,99,235,0.25); }
+    .events-list { display: flex; flex-direction: column; gap: 10px; }
+    .event-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.9); border: 1.5px solid rgba(147,197,253,0.3);
+      border-radius: 14px; box-shadow: 0 2px 8px rgba(59,130,246,0.06);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .event-card:hover { border-color: #3b82f6; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,0.15); }
+    .event-info { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+    .event-title { font-size: 14px; font-weight: 700; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .event-date { font-size: 12px; color: #2563eb; font-weight: 600; }
+    .event-attendees { font-size: 11px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .event-log-btn {
+      padding: 8px 14px; background: #2563eb; color: #ffffff;
+      border: none; border-radius: 8px; font-size: 12px; font-weight: 700;
+      cursor: pointer; font-family: inherit; white-space: nowrap;
+      transition: background 0.2s; flex-shrink: 0;
+    }
+    .event-log-btn:hover { background: #1d4ed8; }
+    .calendar-status { text-align: center; padding: 20px; font-size: 13px; color: #64748b; }
+
     .footer { font-size: 11px; color: #94a3b8; text-align: center; }
+
+    /* ── MEETING MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15,23,42,0.5); z-index: 1000;
+      align-items: center; justify-content: center;
+      padding: 24px; backdrop-filter: blur(4px);
+    }
+    .modal-card {
+      background: #ffffff; border-radius: 20px; padding: 32px;
+      max-width: 520px; width: 100%; max-height: 90vh;
+      overflow-y: auto; box-shadow: 0 24px 64px rgba(0,0,0,0.15);
+      position: relative;
+    }
+    .modal-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
+    .modal-title { font-size: 18px; font-weight: 800; color: #0f172a; }
+    .modal-subtitle { font-size: 13px; color: #64748b; margin-top: 4px; }
+    .close-btn {
+      width: 32px; height: 32px; border-radius: 50%; border: none;
+      background: #f1f5f9; color: #64748b; font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all 0.2s; line-height: 1;
+    }
+    .close-btn:hover { background: #e2e8f0; color: #0f172a; }
+    .form-section-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: #94a3b8; margin-bottom: 12px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .form-label { font-size: 13px; font-weight: 600; color: #1e3a5f; }
+    .form-label .req { color: #2563eb; margin-left: 2px; }
+    .form-input, .form-textarea {
+      padding: 11px 14px; background: #f8fafc;
+      border: 1.5px solid #e2e8f0; border-radius: 10px;
+      color: #0f172a; font-size: 14px; font-family: inherit;
+      outline: none; transition: border-color 0.2s; width: 100%;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: #3b82f6; background: #ffffff; }
+    .form-input.prefilled { background: #eff6ff; border-color: rgba(147,197,253,0.5); color: #1e3a5f; }
+    .form-textarea { min-height: 80px; resize: vertical; }
+    .form-divider { height: 1px; background: #e2e8f0; margin: 18px 0; }
+    .submit-btn {
+      width: 100%; padding: 14px; background: #2563eb; color: #ffffff;
+      border: none; border-radius: 12px; font-size: 15px; font-weight: 700;
+      cursor: pointer; font-family: inherit; transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(37,99,235,0.3); margin-top: 8px;
+    }
+    .submit-btn:hover { background: #1d4ed8; transform: translateY(-1px); }
+    .submit-btn:disabled { background: #94a3b8; cursor: not-allowed; transform: none; box-shadow: none; }
+    .modal-error {
+      display: none; background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3); color: #dc2626;
+      border-radius: 8px; padding: 10px 14px; font-size: 13px; margin-bottom: 14px;
+    }
+    .modal-success { display: none; text-align: center; padding: 40px 20px; }
+    .modal-success .s-icon { font-size: 52px; margin-bottom: 16px; display: block; }
+    .modal-success h3 { font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
+    .modal-success p { font-size: 14px; color: #64748b; margin-bottom: 24px; }
+    .modal-success .close-success-btn {
+      padding: 12px 32px; background: #2563eb; color: #ffffff;
+      border: none; border-radius: 10px; font-size: 14px; font-weight: 700;
+      cursor: pointer; font-family: inherit; transition: background 0.2s;
+    }
+    .modal-success .close-success-btn:hover { background: #1d4ed8; }
   </style>
 </head>
 <body>
 
-  <!-- ── LOGIN SCREEN ── -->
+  <!-- LOGIN SCREEN -->
   <div id="loginScreen">
     <div class="login-logo"></div>
     <div class="login-card">
@@ -257,7 +303,7 @@
     </div>
   </div>
 
-  <!-- ── MAIN APP ── -->
+  <!-- MAIN APP -->
   <div id="appScreen">
 
     <div class="user-bar">
@@ -270,7 +316,7 @@
           <div class="user-email" id="userEmail"></div>
         </div>
       </div>
-      <button class="signout-btn" onclick="signOut()">Sign out</button>
+      <button class="signout-btn" onclick="doSignOut()">Sign out</button>
     </div>
 
     <div class="logo"></div>
@@ -281,11 +327,10 @@
       <p class="welcome-sub">What would you like to do today?</p>
     </div>
 
-    <span class="divider">Choose an action</span>
+    <span class="divider">Quick Actions</span>
 
     <div class="choices">
-
-      <a class="choice-btn" href="https://mrantidata.app.n8n.cloud/form/afa6ee46-8910-4f06-8b6a-4502f6688e2b" target="_blank">
+      <a class="choice-btn" href="#" onclick="event.preventDefault();openManualModal()">
         <div class="choice-icon icon-blue">🪪</div>
         <div class="choice-text">
           <span class="choice-title">Input Meeting Details</span>
@@ -293,7 +338,6 @@
         </div>
         <span class="choice-arrow">›</span>
       </a>
-
       <a class="choice-btn" href="https://mrantidata.app.n8n.cloud/webhook/view-contacts" target="_blank">
         <div class="choice-icon icon-purple">🗄️</div>
         <div class="choice-text">
@@ -302,11 +346,94 @@
         </div>
         <span class="choice-arrow">›</span>
       </a>
+    </div>
 
+    <span class="divider">Or Log from Your Calendar</span>
+
+    <!-- CALENDAR SECTION -->
+    <div class="calendar-section">
+      <div class="calendar-header">
+        <div>
+          <div class="calendar-title">📅 Your Meetings</div>
+          <div class="calendar-subtitle">Click any meeting to log contact details</div>
+        </div>
+        <button class="sync-btn" onclick="syncCalendar()">🔄 Sync</button>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" id="tabPast" onclick="switchTab('past')">⏮ Past 7 days</button>
+        <button class="tab-btn" id="tabUpcoming" onclick="switchTab('upcoming')">⏭ Upcoming 7 days</button>
+      </div>
+
+      <div id="calendarStatus" class="calendar-status">Click 🔄 Sync to load your meetings.</div>
+      <div id="calendarEvents" class="events-list"></div>
     </div>
 
     <p class="footer">MRANTI · Malaysian Research Accelerator for Technology & Innovation</p>
+  </div>
 
+  <!-- MEETING MODAL -->
+  <div class="modal-overlay" id="meetingModal">
+    <div class="modal-card">
+
+      <!-- Success state -->
+      <div class="modal-success" id="modalSuccess">
+        <span class="s-icon">✅</span>
+        <h3>Saved Successfully!</h3>
+        <p>Meeting details have been saved to the CRM.</p>
+        <button class="close-success-btn" onclick="closeModal()">Done</button>
+      </div>
+
+      <!-- Form state -->
+      <div id="modalForm">
+        <div class="modal-header">
+          <div>
+            <div class="modal-title">Log Meeting Details</div>
+            <div class="modal-subtitle" id="modalSubtitle">Fill in the details below</div>
+          </div>
+          <button class="close-btn" onclick="closeModal()">×</button>
+        </div>
+
+        <div class="modal-error" id="modalError"></div>
+
+        <div class="form-section-label">📅 Meeting Info</div>
+
+        <div class="form-group">
+          <label class="form-label">Meeting Title</label>
+          <input class="form-input prefilled" id="fieldEventTitle" type="text" placeholder="e.g. Partnership Discussion"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date &amp; Time</label>
+          <input class="form-input prefilled" id="fieldEventDate" type="text" placeholder="e.g. 1 July 2026, 10:00 AM"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Attendees</label>
+          <input class="form-input prefilled" id="fieldAttendees" type="text" placeholder="e.g. alice@company.com, bob@company.com"/>
+        </div>
+
+        <div class="form-divider"></div>
+        <div class="form-section-label">🪪 Business Card</div>
+
+        <div class="form-group">
+          <label class="form-label">Upload Business Card <span class="req">*</span></label>
+          <input class="form-input" id="fieldBusinessCard" type="file" accept="image/*,.pdf"/>
+        </div>
+
+        <div class="form-divider"></div>
+        <div class="form-section-label">📝 Meeting Details</div>
+
+        <div class="form-group">
+          <label class="form-label">Purpose of Meeting <span class="req">*</span></label>
+          <input class="form-input" id="fieldPurpose" type="text" placeholder="e.g. Partnership discussion, vendor intro"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Meeting Notes <span class="req">*</span></label>
+          <textarea class="form-textarea" id="fieldNotes" placeholder="Key discussion points, action items, follow-ups..."></textarea>
+        </div>
+
+        <button class="submit-btn" id="submitBtn" onclick="submitMeeting()">Save to CRM</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -325,7 +452,17 @@
     const auth = firebase.auth();
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.setCustomParameters({ hd: ALLOWED_DOMAIN });
+    provider.addScope('https://www.googleapis.com/auth/calendar.readonly');
 
+    let currentUser = null;
+    let googleAccessToken = null;
+    let pastEvents = [];
+    let upcomingEvents = [];
+    let currentTab = 'past';
+    let currentEvent = null;
+    window._eventsCache = {};
+
+    // ── AUTH ──
     auth.onAuthStateChanged(user => {
       if (user) {
         const domain = user.email.split('@')[1];
@@ -334,6 +471,7 @@
           showError('Access restricted to @mranti.my accounts only.');
           return;
         }
+        currentUser = user;
         const firstName = user.displayName ? user.displayName.split(' ')[0] : 'there';
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('appScreen').style.display = 'flex';
@@ -347,33 +485,244 @@
           document.getElementById('userInitial').style.display = 'flex';
         }
         hideError();
+        if (googleAccessToken) loadCalendar();
       } else {
+        currentUser = null;
+        googleAccessToken = null;
         document.getElementById('loginScreen').style.display = 'flex';
         document.getElementById('appScreen').style.display = 'none';
       }
     });
 
     function signIn() {
-      auth.signInWithPopup(provider).catch(err => {
+      auth.signInWithPopup(provider).then(result => {
+        const cred = firebase.auth.GoogleAuthProvider.credentialFromResult(result);
+        googleAccessToken = cred.accessToken;
+        loadCalendar();
+      }).catch(err => {
         if (err.code === 'auth/popup-closed-by-user') return;
         showError('Sign in failed. Please try again.');
         console.error(err);
       });
     }
 
-    function signOut() {
+    function doSignOut() {
+      googleAccessToken = null;
+      pastEvents = [];
+      upcomingEvents = [];
       auth.signOut();
     }
 
     function showError(msg) {
       const el = document.getElementById('errorMsg');
+      el.textContent = msg; el.style.display = 'block';
+    }
+    function hideError() {
+      document.getElementById('errorMsg').style.display = 'none';
+    }
+
+    // ── CALENDAR ──
+    async function syncCalendar() {
+      try {
+        const result = await auth.signInWithPopup(provider);
+        const cred = firebase.auth.GoogleAuthProvider.credentialFromResult(result);
+        googleAccessToken = cred.accessToken;
+        await loadCalendar();
+      } catch (e) {
+        if (e.code !== 'auth/popup-closed-by-user') {
+          setCalendarStatus('Failed to sync. Please try again.');
+        }
+      }
+    }
+
+    async function loadCalendar() {
+      if (!googleAccessToken) {
+        setCalendarStatus('Click 🔄 Sync to load your meetings.');
+        return;
+      }
+      setCalendarStatus('Loading your meetings...');
+      document.getElementById('calendarEvents').innerHTML = '';
+
+      try {
+        const now = new Date();
+        const past7 = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        const future7 = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+        const h = { Authorization: `Bearer ${googleAccessToken}` };
+        const base = 'https://www.googleapis.com/calendar/v3/calendars/primary/events';
+
+        const [pRes, uRes] = await Promise.all([
+          fetch(`${base}?timeMin=${past7.toISOString()}&timeMax=${now.toISOString()}&singleEvents=true&orderBy=startTime&maxResults=25`, { headers: h }),
+          fetch(`${base}?timeMin=${now.toISOString()}&timeMax=${future7.toISOString()}&singleEvents=true&orderBy=startTime&maxResults=25`, { headers: h })
+        ]);
+
+        const pData = await pRes.json();
+        const uData = await uRes.json();
+
+        if (pData.error) throw new Error(pData.error.message);
+        if (uData.error) throw new Error(uData.error.message);
+
+        pastEvents = (pData.items || []).reverse();
+        upcomingEvents = uData.items || [];
+
+        document.getElementById('calendarStatus').style.display = 'none';
+        renderEvents(currentTab);
+
+      } catch (e) {
+        setCalendarStatus('⚠️ ' + (e.message || 'Failed to load. Click 🔄 Sync to retry.'));
+      }
+    }
+
+    function setCalendarStatus(msg) {
+      const el = document.getElementById('calendarStatus');
       el.textContent = msg;
       el.style.display = 'block';
     }
 
-    function hideError() {
-      document.getElementById('errorMsg').style.display = 'none';
+    function switchTab(tab) {
+      currentTab = tab;
+      document.getElementById('tabPast').classList.toggle('active', tab === 'past');
+      document.getElementById('tabUpcoming').classList.toggle('active', tab === 'upcoming');
+      renderEvents(tab);
     }
+
+    function renderEvents(tab) {
+      const events = tab === 'past' ? pastEvents : upcomingEvents;
+      const container = document.getElementById('calendarEvents');
+      window._eventsCache = {};
+
+      if (events.length === 0) {
+        container.innerHTML = `<div class="calendar-status">No meetings found for ${tab === 'past' ? 'the past 7 days' : 'the next 7 days'}.</div>`;
+        return;
+      }
+
+      container.innerHTML = events.map((ev, i) => {
+        const key = `e${i}`;
+        window._eventsCache[key] = ev;
+        const start = ev.start?.dateTime || ev.start?.date || '';
+        const title = ev.summary || '(No title)';
+        const others = (ev.attendees || []).filter(a => !a.self).map(a => a.displayName || a.email);
+        return `
+          <div class="event-card" onclick="openEventModal('${key}')">
+            <div class="event-info">
+              <div class="event-title">${esc(title)}</div>
+              <div class="event-date">📅 ${fmtDate(start)}</div>
+              ${others.length ? `<div class="event-attendees">👥 ${esc(others.join(', '))}</div>` : ''}
+            </div>
+            <button class="event-log-btn" onclick="event.stopPropagation();openEventModal('${key}')">Log →</button>
+          </div>`;
+      }).join('');
+    }
+
+    function esc(s) {
+      return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function fmtDate(d) {
+      if (!d) return '';
+      try {
+        return new Date(d).toLocaleString('en-MY', {
+          weekday:'short', day:'numeric', month:'short', year:'numeric',
+          hour: d.includes('T') ? '2-digit' : undefined,
+          minute: d.includes('T') ? '2-digit' : undefined
+        });
+      } catch { return d; }
+    }
+
+    // ── MODAL ──
+    function openEventModal(key) {
+      const ev = window._eventsCache[key];
+      currentEvent = ev;
+      const start = ev?.start?.dateTime || ev?.start?.date || '';
+      const others = (ev?.attendees || []).filter(a => !a.self).map(a => a.displayName || a.email).join(', ');
+      document.getElementById('fieldEventTitle').value = ev?.summary || '';
+      document.getElementById('fieldEventDate').value = start ? fmtDate(start) : '';
+      document.getElementById('fieldAttendees').value = others;
+      document.getElementById('modalSubtitle').textContent = ev?.summary || 'New Meeting Entry';
+      resetModal();
+      document.getElementById('meetingModal').style.display = 'flex';
+    }
+
+    function openManualModal() {
+      currentEvent = null;
+      document.getElementById('fieldEventTitle').value = '';
+      document.getElementById('fieldEventDate').value = '';
+      document.getElementById('fieldAttendees').value = '';
+      document.getElementById('modalSubtitle').textContent = 'Fill in the details below';
+      resetModal();
+      document.getElementById('meetingModal').style.display = 'flex';
+    }
+
+    function resetModal() {
+      document.getElementById('fieldPurpose').value = '';
+      document.getElementById('fieldNotes').value = '';
+      document.getElementById('fieldBusinessCard').value = '';
+      document.getElementById('modalError').style.display = 'none';
+      document.getElementById('modalSuccess').style.display = 'none';
+      document.getElementById('modalForm').style.display = 'block';
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = false;
+      btn.textContent = 'Save to CRM';
+    }
+
+    function closeModal() {
+      document.getElementById('meetingModal').style.display = 'none';
+      currentEvent = null;
+    }
+
+    async function submitMeeting() {
+      const btn = document.getElementById('submitBtn');
+      const errDiv = document.getElementById('modalError');
+
+      const purpose = document.getElementById('fieldPurpose').value.trim();
+      const notes = document.getElementById('fieldNotes').value.trim();
+      const file = document.getElementById('fieldBusinessCard').files[0];
+
+      if (!purpose) { showModalErr('Please enter the purpose of meeting.'); return; }
+      if (!notes)   { showModalErr('Please enter meeting notes.'); return; }
+      if (!file)    { showModalErr('Please upload a business card.'); return; }
+
+      btn.disabled = true;
+      btn.textContent = '⏳ Saving...';
+      errDiv.style.display = 'none';
+
+      const fd = new FormData();
+      fd.append('uploaderName', currentUser.displayName || '');
+      fd.append('uploaderEmail', currentUser.email || '');
+      fd.append('purpose', purpose);
+      fd.append('meetingNotes', notes);
+      fd.append('eventTitle', currentEvent?.summary || document.getElementById('fieldEventTitle').value || '');
+      fd.append('eventDate', currentEvent?.start?.dateTime || currentEvent?.start?.date || document.getElementById('fieldEventDate').value || '');
+      fd.append('attendees', (currentEvent?.attendees || []).filter(a => !a.self).map(a => a.displayName || a.email).join(', ') || document.getElementById('fieldAttendees').value || '');
+      fd.append('businessCard', file);
+
+      try {
+        const res = await fetch('https://mrantidata.app.n8n.cloud/webhook/submit-meeting', {
+          method: 'POST',
+          body: fd
+        });
+        if (res.ok || res.status === 200) {
+          document.getElementById('modalForm').style.display = 'none';
+          document.getElementById('modalSuccess').style.display = 'block';
+        } else {
+          throw new Error(`Server error ${res.status}`);
+        }
+      } catch (e) {
+        showModalErr('Failed to save. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'Save to CRM';
+        console.error(e);
+      }
+    }
+
+    function showModalErr(msg) {
+      const el = document.getElementById('modalError');
+      el.textContent = msg; el.style.display = 'block';
+    }
+
+    // Close modal on backdrop click
+    document.getElementById('meetingModal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
   </script>
 </body>
 </html>
