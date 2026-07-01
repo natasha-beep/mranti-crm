@@ -450,14 +450,54 @@
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
-    const provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('https://www.googleapis.com/auth/calendar.readonly');
 
-    provider.setCustomParameters({
-      hd: ALLOWED_DOMAIN,
-      prompt: 'consent',
-      include_granted_scopes: 'true'
-    });
+    function buildGoogleProvider() {
+      const p = new firebase.auth.GoogleAuthProvider();
+
+      p.addScope('email');
+      p.addScope('profile');
+      p.addScope('https://www.googleapis.com/auth/calendar.readonly');
+
+      p.setCustomParameters({
+        hd: ALLOWED_DOMAIN,
+        prompt: 'consent',
+        access_type: 'online',
+        include_granted_scopes: 'true'
+      });
+
+      return p;
+    }
+
+    let provider = buildGoogleProvider();
+
+    function getAccessTokenFromResult(result) {
+      console.log('Full Firebase popup result:', result);
+
+      let token = null;
+
+      try {
+        const cred = firebase.auth.GoogleAuthProvider.credentialFromResult(result);
+        if (cred && cred.accessToken) {
+          token = cred.accessToken;
+        }
+      } catch (e) {
+        console.warn('credentialFromResult failed:', e);
+      }
+
+      if (!token && result.credential && result.credential.accessToken) {
+        token = result.credential.accessToken;
+      }
+
+      if (!token && result._tokenResponse && result._tokenResponse.oauthAccessToken) {
+        token = result._tokenResponse.oauthAccessToken;
+      }
+
+      if (!token && result.user && result.user.stsTokenManager && result.user.stsTokenManager.accessToken) {
+        console.warn('Firebase ID token exists, but this is not the Google Calendar OAuth token.');
+      }
+
+      return token;
+    }
 
     let currentUser = null;
     let googleAccessToken = null;
@@ -500,14 +540,23 @@
     });
 
     function signIn() {
+      provider = buildGoogleProvider();
+
       auth.signInWithPopup(provider).then(result => {
-        const cred = firebase.auth.GoogleAuthProvider.credentialFromResult(result);
-        googleAccessToken = cred.accessToken;
+        const token = getAccessTokenFromResult(result);
+
+        if (!token) {
+          throw new Error('Google login worked, but no Calendar access token was returned.');
+        }
+
+        googleAccessToken = token;
         loadCalendar();
+
       }).catch(err => {
         if (err.code === 'auth/popup-closed-by-user') return;
-        showError('Sign in failed. Please try again.');
-        console.error(err);
+
+        showError('Sign in failed: ' + (err.message || err.code || 'Please try again.'));
+        console.error('Sign-in error:', err);
       });
     }
 
@@ -527,27 +576,36 @@
     }
 
     // ── CALENDAR ──
-    
     async function syncCalendar() {
       try {
-        setCalendarStatus('Opening Google permission popup...');
-    
-        const result = await auth.signInWithPopup(provider);
-        const cred = firebase.auth.GoogleAuthProvider.credentialFromResult(result);
-    
-        googleAccessToken = cred && cred.accessToken ? cred.accessToken : null;
-    
-        if (!googleAccessToken) {
-          throw new Error('No Google access token returned. Calendar permission may not have been granted.');
+        setCalendarStatus('Opening Google Calendar permission popup...');
+
+        provider = buildGoogleProvider();
+
+        let result;
+
+        if (auth.currentUser) {
+          result = await auth.currentUser.reauthenticateWithPopup(provider);
+        } else {
+          result = await auth.signInWithPopup(provider);
         }
-    
-        console.log('Google access token received:', googleAccessToken ? 'YES' : 'NO');
-    
+
+        const token = getAccessTokenFromResult(result);
+
+        if (!token) {
+          throw new Error('Google allowed Calendar access, but Firebase did not return the access token.');
+        }
+
+        googleAccessToken = token;
+        console.log('Calendar access token received:', googleAccessToken ? 'YES' : 'NO');
+
         await loadCalendar();
-    
+
       } catch (e) {
         console.error('Calendar sync error:', e);
-        setCalendarStatus('⚠️ Calendar sync failed: ' + (e.message || e.code || 'Unknown error'));
+        if (e.code !== 'auth/popup-closed-by-user') {
+          setCalendarStatus('⚠️ Calendar sync failed: ' + (e.message || e.code || 'Unknown error'));
+        }
       }
     }
 
