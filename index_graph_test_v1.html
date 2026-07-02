@@ -1143,135 +1143,7 @@
       margin: 0 auto;
     }
 
-  
-
-    /* TEST DASHBOARD HEADER ALIGNMENT V2 */
-    .top-nav-aligned {
-      width: 100%;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 18px 22px;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.82);
-      border: 1px solid rgba(147,197,253,0.38);
-      box-shadow: 0 18px 56px rgba(37,99,235,0.12), 0 2px 8px rgba(15,23,42,0.04);
-      backdrop-filter: blur(16px);
-    }
-
-    .top-nav-aligned .brand-block {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex: 1 1 auto;
-      min-width: 0;
-    }
-
-    .top-nav-aligned .brand-logo {
-      width: 150px;
-      height: 46px;
-      flex-shrink: 0;
-    }
-
-    .brand-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #38bdf8, #2563eb);
-      color: #ffffff;
-      font-size: 20px;
-      font-weight: 800;
-      box-shadow: 0 12px 28px rgba(37,99,235,0.28);
-      flex-shrink: 0;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 12px;
-      min-width: 0;
-      flex: 0 1 auto;
-    }
-
-    .test-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(245,158,11,0.65);
-      background: rgba(254,243,199,0.75);
-      color: #92400e;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.6px;
-      white-space: nowrap;
-    }
-
-    .record-pill {
-      color: #64748b;
-      font-size: 12px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .compact-user-bar {
-      min-width: 360px !important;
-      max-width: 460px !important;
-      background: rgba(248,250,252,0.88) !important;
-      border: 1px solid rgba(147,197,253,0.45) !important;
-      border-radius: 18px !important;
-      padding: 9px 10px 9px 12px !important;
-      box-shadow: none !important;
-    }
-
-    .user-text-wrap {
-      min-width: 0;
-    }
-
-    @media (max-width: 1080px) {
-      .top-nav-aligned {
-        align-items: stretch;
-        flex-direction: column;
-      }
-
-      .top-actions {
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
-
-      .compact-user-bar {
-        flex: 1 1 100%;
-        min-width: 0 !important;
-        max-width: none !important;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .top-nav-aligned .brand-logo {
-        width: 132px;
-      }
-
-      .brand-divider,
-      .brand-icon,
-      .brand-copy,
-      .record-pill {
-        display: none !important;
-      }
-
-      .top-actions,
-      .signout-btn {
-        width: 100%;
-      }
-
-      .test-pill {
-        width: 100%;
-      }
-    }
-</style>
+  </style>
 </head>
 <body>
 
@@ -1294,32 +1166,27 @@
   <!-- MAIN APP -->
   <div id="appScreen">
 
-    <header class="top-nav top-nav-aligned">
+    <header class="top-nav">
       <div class="brand-block">
         <div class="logo brand-logo"></div>
         <div class="brand-divider"></div>
-        <div class="brand-icon">↗</div>
         <div class="brand-copy">
           <div class="brand-kicker">CRM Workspace</div>
           <div class="brand-subtitle">Graph sandbox for meetings, contacts and relationship mapping</div>
         </div>
       </div>
 
-      <div class="top-actions">
-        <span class="test-pill">TEST WORKFLOW</span>
-        <span class="record-pill">Sandbox dashboard</span>
-        <div class="user-bar compact-user-bar">
-          <div class="user-info">
-            <img class="user-avatar" id="userPhoto" src="" alt=""
-              onerror="this.style.display='none';document.getElementById('userInitial').style.display='flex'"/>
-            <div class="user-avatar-placeholder" id="userInitial" style="display:none"></div>
-            <div class="user-text-wrap">
-              <div class="user-name" id="userName"></div>
-              <div class="user-email" id="userEmail"></div>
-            </div>
+      <div class="user-bar">
+        <div class="user-info">
+          <img class="user-avatar" id="userPhoto" src="" alt=""
+            onerror="this.style.display='none';document.getElementById('userInitial').style.display='flex'"/>
+          <div class="user-avatar-placeholder" id="userInitial" style="display:none"></div>
+          <div>
+            <div class="user-name" id="userName"></div>
+            <div class="user-email" id="userEmail"></div>
           </div>
-          <button class="signout-btn" onclick="doSignOut()">Sign out</button>
         </div>
+        <button class="signout-btn" onclick="doSignOut()">Sign out</button>
       </div>
     </header>
 
