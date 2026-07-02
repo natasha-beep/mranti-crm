@@ -260,6 +260,83 @@
     .form-input.prefilled { background: #eff6ff; border-color: rgba(147,197,253,0.5); color: #1e3a5f; }
     .form-textarea { min-height: 80px; resize: vertical; }
     .form-divider { height: 1px; background: #e2e8f0; margin: 18px 0; }
+
+    .contact-method-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .contact-method {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .contact-method:hover {
+      border-color: #bfdbfe;
+      background: #ffffff;
+    }
+
+    .contact-method input {
+      margin-top: 2px;
+      accent-color: #2563eb;
+      flex-shrink: 0;
+    }
+
+    .contact-method-title {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.25;
+    }
+
+    .contact-method-desc {
+      display: block;
+      margin-top: 3px;
+      font-size: 11px;
+      color: #64748b;
+      line-height: 1.35;
+    }
+
+    .contact-method:has(input:checked) {
+      border-color: #2563eb;
+      background: #eff6ff;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.08);
+    }
+
+    .manual-contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .helper-text {
+      font-size: 11.5px;
+      line-height: 1.45;
+      color: #64748b;
+      margin: -4px 0 12px;
+    }
+
+    .hidden-section {
+      display: none;
+    }
+
+    @media (max-width: 560px) {
+      .contact-method-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .submit-btn {
       width: 100%; padding: 14px; background: #2563eb; color: #ffffff;
       border: none; border-radius: 12px; font-size: 15px; font-weight: 700;
@@ -1218,11 +1295,51 @@
         </div>
 
         <div class="form-divider"></div>
-        <div class="form-section-label"><span class="tech-icon">ID</span> Business Card</div>
+        <div class="form-section-label">Contact Details</div>
 
-        <div class="form-group">
-          <label class="form-label">Upload Business Card <span class="req">*</span></label>
-          <input class="form-input" id="fieldBusinessCard" type="file" accept="image/*,.pdf"/>
+        <div class="contact-method-grid">
+          <label class="contact-method">
+            <input type="radio" name="contactInputMethod" id="methodBusinessCard" value="businessCard" checked onchange="setContactInputMethod('businessCard')"/>
+            <span>
+              <span class="contact-method-title">Upload business card</span>
+              <span class="contact-method-desc">Use OCR to extract contact details</span>
+            </span>
+          </label>
+
+          <label class="contact-method">
+            <input type="radio" name="contactInputMethod" id="methodManual" value="manual" onchange="setContactInputMethod('manual')"/>
+            <span>
+              <span class="contact-method-title">Enter manually</span>
+              <span class="contact-method-desc">No business card required</span>
+            </span>
+          </label>
+        </div>
+
+        <div id="businessCardSection">
+          <div class="form-group">
+            <label class="form-label">Upload Business Card <span class="req">*</span></label>
+            <input class="form-input" id="fieldBusinessCard" type="file" accept="image/*,.pdf"/>
+          </div>
+          <p class="helper-text">Upload an image or PDF of the business card. The system will extract the person, company and email.</p>
+        </div>
+
+        <div id="manualContactSection" class="hidden-section">
+          <div class="manual-contact-grid">
+            <div class="form-group">
+              <label class="form-label">Person Name <span class="req">*</span></label>
+              <input class="form-input" id="fieldManualPersonName" type="text" placeholder="e.g. Ms. Aina A. Rahman"/>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Company Name <span class="req">*</span></label>
+              <input class="form-input" id="fieldManualCompanyName" type="text" placeholder="e.g. MRANTI"/>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email <span class="req">*</span></label>
+              <input class="form-input" id="fieldManualEmail" type="email" placeholder="e.g. name@company.com"/>
+            </div>
+          </div>
         </div>
 
         <div class="form-divider"></div>
@@ -1243,7 +1360,7 @@
   </div>
 
   <script>
-    console.log('MRANTI CRM tech UI v6 loaded');
+    console.log('MRANTI CRM contact input options v7 loaded');
     const firebaseConfig = {
       apiKey: "AIzaSyCoNzt4JzU6P52hm38LKsAaUl8VwzuOszs",
       authDomain: "mranti-crm.firebaseapp.com",
@@ -1550,12 +1667,31 @@
       document.getElementById('fieldPurpose').value = '';
       document.getElementById('fieldNotes').value = '';
       document.getElementById('fieldBusinessCard').value = '';
+      document.getElementById('fieldManualPersonName').value = '';
+      document.getElementById('fieldManualCompanyName').value = '';
+      document.getElementById('fieldManualEmail').value = '';
+      document.getElementById('methodBusinessCard').checked = true;
+      setContactInputMethod('businessCard');
       document.getElementById('modalError').style.display = 'none';
       document.getElementById('modalSuccess').style.display = 'none';
       document.getElementById('modalForm').style.display = 'block';
       const btn = document.getElementById('submitBtn');
       btn.disabled = false;
       btn.textContent = 'Save to CRM';
+    }
+
+    function setContactInputMethod(method) {
+      const isManual = method === 'manual';
+      document.getElementById('businessCardSection').style.display = isManual ? 'none' : 'block';
+      document.getElementById('manualContactSection').style.display = isManual ? 'block' : 'none';
+
+      if (isManual) {
+        document.getElementById('fieldBusinessCard').value = '';
+      } else {
+        document.getElementById('fieldManualPersonName').value = '';
+        document.getElementById('fieldManualCompanyName').value = '';
+        document.getElementById('fieldManualEmail').value = '';
+      }
     }
 
     function closeModal() {
@@ -1569,11 +1705,28 @@
 
       const purpose = document.getElementById('fieldPurpose').value.trim();
       const notes = document.getElementById('fieldNotes').value.trim();
+      const inputMethod = document.querySelector('input[name="contactInputMethod"]:checked')?.value || 'businessCard';
+
       const file = document.getElementById('fieldBusinessCard').files[0];
+      const manualPersonName = document.getElementById('fieldManualPersonName').value.trim();
+      const manualCompanyName = document.getElementById('fieldManualCompanyName').value.trim();
+      const manualEmail = document.getElementById('fieldManualEmail').value.trim();
 
       if (!purpose) { showModalErr('Please enter the purpose of meeting.'); return; }
       if (!notes)   { showModalErr('Please enter meeting notes.'); return; }
-      if (!file)    { showModalErr('Please upload a business card.'); return; }
+
+      if (inputMethod === 'businessCard') {
+        if (!file) { showModalErr('Please upload a business card, or choose Enter manually.'); return; }
+      }
+
+      if (inputMethod === 'manual') {
+        if (!manualPersonName) { showModalErr('Please enter the person name.'); return; }
+        if (!manualCompanyName) { showModalErr('Please enter the company name.'); return; }
+        if (!manualEmail) { showModalErr('Please enter the email address.'); return; }
+
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(manualEmail);
+        if (!emailOk) { showModalErr('Please enter a valid email address.'); return; }
+      }
 
       btn.disabled = true;
       btn.textContent = 'Saving...';
@@ -1587,7 +1740,19 @@
       fd.append('eventTitle', currentEvent?.summary || document.getElementById('fieldEventTitle').value || '');
       fd.append('eventDate', currentEvent?.start?.dateTime || currentEvent?.start?.date || document.getElementById('fieldEventDate').value || '');
       fd.append('attendees', (currentEvent?.attendees || []).filter(a => !a.self).map(a => a.displayName || a.email).join(', ') || document.getElementById('fieldAttendees').value || '');
-      fd.append('businessCard', file);
+
+      fd.append('inputMethod', inputMethod);
+
+      if (inputMethod === 'businessCard') {
+        fd.append('businessCard', file);
+        fd.append('manualPersonName', '');
+        fd.append('manualCompanyName', '');
+        fd.append('manualEmail', '');
+      } else {
+        fd.append('manualPersonName', manualPersonName);
+        fd.append('manualCompanyName', manualCompanyName);
+        fd.append('manualEmail', manualEmail);
+      }
 
       try {
         const res = await fetch('https://mrantidata.app.n8n.cloud/webhook/submit-meeting', {
